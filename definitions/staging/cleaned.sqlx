@@ -1,0 +1,17 @@
+config {
+    type: "table"
+}
+
+SELECT
+    commit_hash,
+    commit_subject,
+    author_name,
+    author_email,
+    TIMESTAMP_SECONDS(author_date) AS author_date,
+    commiter_email,
+    commiter_name,
+    file,
+    REGEXP_EXTRACT(file, "(tools|examples)/[^/]+/.*") AS type,
+    REGEXP_EXTRACT(file, "[tools|examples]/([^/]+)/.*") AS sub_repo,
+    CONCAT(author_name, ' <', author_email, '>') AS author
+FROM ${ref("raw")}

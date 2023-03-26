@@ -1,0 +1,13 @@
+config {
+    type: "view"
+}
+
+SELECT
+    author_email,
+    sub_repo,
+    COUNT(DISTINCT commit_hash) AS commits_in_folder
+FROM
+    ${ref("cleaned")}
+GROUP BY 
+    1,
+    2
