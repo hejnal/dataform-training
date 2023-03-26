@@ -1,4 +1,4 @@
-users = ["fake_user@example.com"]
+const users = ["fake_user@example.com"]
 
 users.forEach( (user, index) => 
     operate(`cleanup_pii_user_${index}`).dependencies("cleaned").queries(ctx => `
