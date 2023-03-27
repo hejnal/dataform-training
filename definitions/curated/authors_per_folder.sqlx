@@ -52,7 +52,9 @@ SELECT
     sub_repo,
     type,
     author_date,
-    ARRAY_AGG(STRUCT(author AS name, commits) ORDER BY commits DESC) AS authors
+    ARRAY_AGG(STRUCT(author AS name, commits) ORDER BY commits DESC) AS authors,
+    '${dataform.projectConfig.vars.logicalDate}' AS job_logical_date,
+    '${dataform.projectConfig.vars.jobDescription}' AS job_description
 FROM last_commits_per_folder
 GROUP BY
     1,

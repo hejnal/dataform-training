@@ -7,7 +7,9 @@ config {
 SELECT
     author_email,
     sub_repo,
-    COUNT(commit_hash) AS commits_in_folder
+    COUNT(commit_hash) AS commits_in_folder,
+    '${dataform.projectConfig.vars.logicalDate}' AS job_logical_date,
+    '${dataform.projectConfig.vars.jobDescription}' AS job_description
 FROM
     ${ref("cleaned")}
 GROUP BY 

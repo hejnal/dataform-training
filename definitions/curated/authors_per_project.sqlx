@@ -8,7 +8,9 @@ SELECT
     sub_repo,
     MAX(author_date) AS last_author_date,
     ARRAY_AGG(author_email) AS authors_list,
-    STRING_AGG(author_email) AS authors_str
+    STRING_AGG(author_email) AS authors_str,
+    '${dataform.projectConfig.vars.logicalDate}' AS job_logical_date,
+    '${dataform.projectConfig.vars.jobDescription}' AS job_description
 FROM
     ${ref("cleaned")}
 GROUP BY
