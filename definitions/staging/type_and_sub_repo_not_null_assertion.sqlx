@@ -1,0 +1,9 @@
+config {
+    type: "assertion"
+}
+
+SELECT * 
+FROM
+${ref("cleaned")}
+WHERE
+type IS NULL OR sub_repo IS NULL

@@ -1,0 +1,18 @@
+config { 
+    type: "view",
+    dependencies: ["type_and_sub_repo_not_null_assertion"] 
+}
+
+SELECT 
+    type,
+    sub_repo,
+    MAX(author_date) AS last_author_date,
+    ARRAY_AGG(author_email) AS authors_list,
+    STRING_AGG(author_email) AS authors_str
+FROM
+    ${ref("cleaned")}
+GROUP BY
+    1,
+    2
+ORDER BY
+    3 DESC
