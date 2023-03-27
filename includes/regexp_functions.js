@@ -1,5 +1,5 @@
 function parseSubRepo(file) {
-    return `IFNULL(REGEXP_EXTRACT(${file}, "(tools|examples)/[^/]+/.*"), "unknown")`;
+    return `IFNULL(REGEXP_EXTRACT(${file}, "[tools|examples]/([^/]+)/.*"), "unknown")`;
 }
 
 function parseType(file) {
