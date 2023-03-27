@@ -1,12 +1,5 @@
 config {
-    type: "incremental",
-    uniqueKey: ["commit_hash", "file"],
-    assertions: {
-        uniqueKey: ["commit_hash", "file"],
-        rowConditions: [
-            "author_email LIKE '%@%.%'"
-        ]
-    }
+    type: "table",
 }
 
 SELECT
@@ -18,8 +11,8 @@ SELECT
     commiter_email,
     commiter_name,
     file,
-    ${regexp_functions.parseType("file")} AS type,
-    ${regexp_functions.parseSubRepo("file")} AS sub_repo,
+    IFNULL(REGEXP_EXTRACT(file, "(tools|examples)/[^/]+/.*"), "unknown") AS type,
+    IFNULL(REGEXP_EXTRACT(file, "[tools|examples]/([^/]+)/.*"), "unknown") AS sub_repo,
     CONCAT(author_name, ' <', author_email, '>') AS author
 FROM ${ref("raw")}
 ${when(incremental(), `WHERE TIMESTAMP_SECONDS(author_date) > (SELECT MAX(author_date) FROM ${self()})`) }

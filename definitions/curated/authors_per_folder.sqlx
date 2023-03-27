@@ -1,6 +1,5 @@
 config { 
-    type: "view",
-    dependencies: ["type_and_sub_repo_not_null_assertion"]
+    type: "view"
 }
 
 WITH 
