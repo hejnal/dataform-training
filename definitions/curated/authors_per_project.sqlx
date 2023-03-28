@@ -8,7 +8,7 @@ config {
     tags: ["reports"],
     bigquery: {
         labels: {
-            hasPii: "true"
+            has_pii: "true"
         }
     }
 }
