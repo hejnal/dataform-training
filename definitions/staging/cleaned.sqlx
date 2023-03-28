@@ -1,5 +1,5 @@
 config {
-    type: "table",
+    type: "incremental",
     uniqueKey: ["commit_hash", "file"],
     assertions: {
         uniqueKey: ["commit_hash", "file"],
@@ -8,10 +8,10 @@ config {
         ]
     },
     description: "This table containes clean commits",
-    columns: {
+    /*columns: {
         author_email: {
             description: "email of the person"
-            /* bigqueryPolicyTags: ["projects/whejna-modelling-sandbox/locations/europe-west3/taxonomies/8573989648110053613/policyTags/1277940691778408610"]*/
+            bigqueryPolicyTags: ["projects/whejna-modelling-sandbox/locations/europe-west3/taxonomies/8573989648110053613/policyTags/1277940691778408610"]
         }
     },
     bigquery: {
@@ -19,7 +19,7 @@ config {
         labels: {
             "has_pii": "true"
         }
-    }
+    }*/
 }
 
 SELECT
