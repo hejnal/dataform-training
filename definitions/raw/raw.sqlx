@@ -17,5 +17,5 @@ CREATE OR REPLACE TABLE ${self()} (
 LOAD DATA INTO ${self()}
 FROM FILES (
   format='JSON',
-  uris = ['gs://whejna-modelling-sandbox/pso_git_data.jsonl']
+  uris = ['gs://whejna-modelling-sandbox/pso.jsonl']
 );
