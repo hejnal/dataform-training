@@ -1,6 +1,16 @@
 config { 
     type: "view",
-    dependencies: ["type_and_sub_repo_not_null_assertion"] 
+    dependencies: ["type_and_sub_repo_not_null_assertion"],
+    description: "this table contains authors per project",
+    columns: {
+        authors_str: "List of authors in a string format"
+    },
+    tags: ["reports"],
+    bigquery: {
+        labels: {
+            hasPii: "true"
+        }
+    }
 }
 
 SELECT 
