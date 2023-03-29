@@ -3,5 +3,9 @@
   "assertionSchema": "dataform_training",
   "warehouse": "bigquery",
   "defaultDatabase": "whejna-modelling-sandbox",
-  "defaultLocation": "europe-west3"
+  "defaultLocation": "europe-west3",
+  "vars": {
+    "logicalDate": "2023-03-01",
+    "jobDescription": ""
+  }
 }

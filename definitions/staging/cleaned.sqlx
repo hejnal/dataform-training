@@ -1,0 +1,38 @@
+config {
+    type: "incremental",
+    uniqueKey: ["commit_hash", "file"],
+    assertions: {
+        uniqueKey: ["commit_hash", "file"],
+        rowConditions: [
+            "author_email LIKE '%@%.%'"
+        ]
+    },
+    description: "This table containes clean commits",
+    /*columns: {
+        author_email: {
+            description: "email of the person"
+            bigqueryPolicyTags: ["projects/whejna-modelling-sandbox/locations/europe-west3/taxonomies/8573989648110053613/policyTags/1277940691778408610"]
+        }
+    },
+    bigquery: {
+        partitionBy: "DATE(author_date)",
+        labels: {
+            "has_pii": "true"
+        }
+    }*/
+}
+
+SELECT
+    commit_hash,
+    commit_subject,
+    author_name,
+    author_email,
+    TIMESTAMP_SECONDS(author_date) AS author_date,
+    commiter_email,
+    commiter_name,
+    file,
+    ${regexp_functions.parseType("file")} AS type,
+    ${regexp_functions.parseSubRepo("file")} AS sub_repo,
+    CONCAT(author_name, ' <', author_email, '>') AS author
+FROM ${ref("raw")}
+${when(incremental(), `WHERE TIMESTAMP_SECONDS(author_date) > (SELECT MAX(author_date) FROM ${self()})`) }

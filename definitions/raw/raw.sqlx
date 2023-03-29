@@ -1,0 +1,21 @@
+config {
+    type: 'operations',
+    hasOutput: true,
+}
+
+CREATE OR REPLACE TABLE ${self()} (
+  file STRING,
+  commiter_name STRING,
+  commiter_email STRING,
+  author_date INTEGER,
+  author_email STRING,
+  author_name STRING,
+  commit_subject STRING,
+  commit_hash STRING
+);
+
+LOAD DATA INTO ${self()}
+FROM FILES (
+  format='JSON',
+  uris = ['gs://whejna-modelling-sandbox/pso.jsonl']
+);
